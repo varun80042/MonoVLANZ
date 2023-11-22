@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS VLANZ;
 USE VLANZ;
 
-
 -- Table: customer
 CREATE TABLE IF NOT EXISTS customer (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -15,7 +14,6 @@ CREATE TABLE IF NOT EXISTS customer (
     Location VARCHAR(100)
 );
 
-
 -- Table: freelancer
 CREATE TABLE IF NOT EXISTS freelancer (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -26,7 +24,6 @@ CREATE TABLE IF NOT EXISTS freelancer (
     PhoneNo VARCHAR(15),
     Location VARCHAR(100)
 );
-
 
 -- Table: service
 CREATE TABLE IF NOT EXISTS service (
@@ -40,7 +37,6 @@ CREATE TABLE IF NOT EXISTS service (
     deleted BOOLEAN DEFAULT 0,
     FOREIGN KEY (freelancer_id) REFERENCES freelancer(id)
 );
-
 
 -- Table: orders
 CREATE TABLE IF NOT EXISTS orders (
@@ -56,7 +52,6 @@ CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (placed_by_id) REFERENCES customer(id)
 );
 
-
 -- Table: customer_phone
 CREATE TABLE IF NOT EXISTS customer_phone (
     customer_id INT,
@@ -65,7 +60,6 @@ CREATE TABLE IF NOT EXISTS customer_phone (
     FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
 
-
 -- Table: seller_phone
 CREATE TABLE IF NOT EXISTS seller_phone (
     freelancer_id INT,
@@ -73,7 +67,6 @@ CREATE TABLE IF NOT EXISTS seller_phone (
     PRIMARY KEY (freelancer_id, phone_no),
     FOREIGN KEY (freelancer_id) REFERENCES freelancer(id)
 );
-
 
 -- Table: services
 CREATE TABLE IF NOT EXISTS services (
@@ -84,7 +77,6 @@ CREATE TABLE IF NOT EXISTS services (
     FOREIGN KEY (service_id) REFERENCES service(id)
 );
 
-
 -- Table: past_orders
 CREATE TABLE IF NOT EXISTS past_orders (
     customer_id INT,
@@ -93,7 +85,6 @@ CREATE TABLE IF NOT EXISTS past_orders (
     FOREIGN KEY (customer_id) REFERENCES customer(id),
     FOREIGN KEY (order_id) REFERENCES orders(id)
 );
-
 
 -- Trigger to set the minimum cost of service to 500 Rupees
 DELIMITER //
@@ -108,7 +99,6 @@ END;
 //
 DELIMITER ;
 
-
 -- Function to get the name of the customer logged in
 DELIMITER //
 CREATE FUNCTION get_customer_name(customer_id INT) RETURNS VARCHAR(100) DETERMINISTIC
@@ -119,7 +109,6 @@ BEGIN
 END;
 //
 DELIMITER ;
-
 
 -- Function to get the name of the freelancer logged in
 DELIMITER //
@@ -132,7 +121,6 @@ END;
 //
 DELIMITER ;
 
-
 -- Procedure to "delete" a service by its service ID
 DELIMITER //
 CREATE PROCEDURE delete_service(IN service_id INT)
@@ -141,7 +129,6 @@ BEGIN
 END;
 //
 DELIMITER ;
-
 
 -- Procedure to update a service by its service ID
 DELIMITER //
